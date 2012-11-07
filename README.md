@@ -14,3 +14,9 @@ Module:
   * datetime
   * random
 ---------------------------------------------------
+ex-basic:
+  * example of magic value to do shell script to
+    python script tranfermation.
+  * argument parsing
+  * class example
+---------------------------------------------------

@@ -1,0 +1,66 @@
+#!/bin/sh
+
+magic='--calling-python-from-/bin/sh--'
+"""exec" python -E "$0" "$@" """#$magic"
+
+if __name__ == '__main__':
+  import sys 
+  if sys.argv[-1] == '#%s' % magic:
+    del sys.argv[-1]
+del magic
+
+import os
+import getopt
+
+class ClassExample:
+  ''' Pattern generator '''
+
+  def __init__(self, al=''):
+    self.__list = al;
+
+  def showMe(self, at=''):
+    print 'in class: list= %s; test=%s'%(self.__list, at)
+
+def parse_argv(argv):
+  try:
+    opts, args = getopt.getopt(argv,
+                               'hl:t:',
+                               ['help', 'list=', 'test='])
+  except getopt.GetoptError, err:
+    # print help infomration and exit
+    print str(err)
+    usage()
+    sys.exit(2)
+
+  list = None
+  test = None
+
+  for o, a in opts:
+    if o in ('-l', '--list'):
+      list = a
+    elif o in ('-t', '--test'):
+      test = a
+    elif o in ('-h', '--help'):
+      usage()
+      sys.exit(0)
+    else:
+      usage()
+      sys.exit(2)
+
+  return [list, test, args]
+
+def main(orig_args):
+  print 'Hello! arguments are:'
+  alist, atest, misc = parse_argv(orig_args) 
+  print 'list: %s'%(alist)
+  print 'test: %s'%(atest)
+  print 'misc: %s'%(misc)
+
+  ce = ClassExample(alist) 
+  ce.showMe(atest)
+#
+# Entry point
+#
+if __name__ == '__main__':
+  main(sys.argv[1:])
+
