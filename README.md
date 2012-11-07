@@ -13,10 +13,17 @@ specific format, and a random number
 Module:
   * datetime
   * random
+
 ---------------------------------------------------
 python/ex-basic:
   * example of magic value to do shell script to
     python script tranfermation.
   * argument parsing
   * class example
+
+---------------------------------------------------
+python/ex-subprocess.py:
+  * example of subprocess module to get stdout,
+    stderr, return code of child process
+
 ---------------------------------------------------
