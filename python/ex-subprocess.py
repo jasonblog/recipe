@@ -19,6 +19,7 @@ if __name__ == '__main__':
   print 'cmd:%s' %(cmd)
   print 'return: %s'%(ret)
   print 'stdout: \n%s'%(cstdout)
+  print 'stderr: %s'%(cstderr)
 
   #
   # error case
@@ -33,6 +34,26 @@ if __name__ == '__main__':
   print '------------------------------------\n'
   print 'cmd:%s' %(cmd)
   print 'return: %s'%(ret)
+  print 'stdout: %s'%(cstdout)
   print 'stderr: %s'%(cstderr)
   print '------------------------------------\n'
+
+  #
+  # file case
+  #
+  fd = open('./test.log', 'a')
+  cmd = ['ls', '--ggg']
+  child = subprocess.Popen(cmd,
+                           stdout = fd,
+                           stderr = subprocess.STDOUT)
+  child.communicate()
+  ret  = child.returncode
+  fd.close()
+
+  print '------------------------------------\n'
+  print 'cmd:%s' %(cmd)
+  print 'return: %s'%(ret)
+  print 'stderr: %s'%(cstderr)
+  print '------------------------------------\n'
+
 
