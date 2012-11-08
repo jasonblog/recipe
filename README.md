@@ -15,6 +15,10 @@ Module:
   * random
 
 ---------------------------------------------------
+python/ex-regular.py:
+  regular expression example
+
+---------------------------------------------------
 python/ex-basic:
   * example of magic value to do shell script to
     python script tranfermation.
