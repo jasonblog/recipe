@@ -31,3 +31,11 @@ python/ex-subprocess.py:
     stderr, return code of child process
 
 ---------------------------------------------------
+python/ex-randomid.py:
+  * example of generating a random string
+
+---------------------------------------------------
+python/ex-pdb.py:
+  * example of usning python debugger
+
+
