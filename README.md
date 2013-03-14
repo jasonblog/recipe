@@ -38,4 +38,10 @@ python/ex-randomid.py:
 python/ex-pdb.py:
   * example of usning python debugger
 
-
+---------------------------------------------------
+shell/genmain:
+  generate a basic hello world c file
+---------------------------------------------------
+shell/gentest:
+  generate a basic c file and Makefile
+---------------------------------------------------

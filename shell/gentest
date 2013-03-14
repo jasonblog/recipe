@@ -1,0 +1,34 @@
+#!/bin/bash
+
+FILE="$1.c"
+
+if [ "$FILE" == ".c" ]; then
+    FILE=main.c
+fi
+
+# generate a basic main.c
+cat > ./$FILE << !EOF
+#include <stdio.h>
+
+int
+main(int argc, void **argv)
+{
+    printf("hello world\n");
+    return 0;
+}
+!EOF
+
+# generate a basic makefile which make main.c
+cat > Makefile << !EOF
+FILE=$FILE
+OUT=\$(FILE:.c= )
+
+.PHONY: all clean
+all: \$(OUT)
+
+\$(OUT): \$(FILE)
+	\$(CC) \$(CFLAGS) -o \$@ \$<
+
+clean:
+	-rm \$(OUT)
+!EOF
