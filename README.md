@@ -36,7 +36,11 @@ python/ex-randomid.py:
 
 ---------------------------------------------------
 python/ex-pdb.py:
-  * example of usning python debugger
+  * example of using python debugger
+
+---------------------------------------------------
+python/ex-post.py:
+  * example of using urllib to send http post 
 
 ---------------------------------------------------
 shell/genmain:
