@@ -8,3 +8,7 @@ ex-func.gdb:
 ex-while.gdb:
   example of while-loop, stdout
 
+---------------------------------------------------
+ex-pyscript:
+  example of using python script in gdb
+
