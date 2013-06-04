@@ -1,0 +1,28 @@
+#!/bin/bash
+
+ARGA=
+ARGB=
+HELP=
+
+usage()
+{
+        echo "Usage: $0 [-a arga] [-b argb] [-h]"
+        echo "         Example bash argument parsing"
+        echo "  -a <arga>   Argument A"
+        echo "  -b <argb>   Argument B"
+        exit 1
+}
+
+
+
+while getopts   "a:b:h" optn; do
+        case    $optn   in  
+                a   ) ARGA=$OPTARG;;
+                b   ) ARGB=$OPTARG;;
+                h   ) usage; exit 1;; 
+        esac
+done
+
+echo "Argument A is $ARGA"
+echo "Argument B is $ARGB"
+
