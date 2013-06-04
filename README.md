@@ -5,6 +5,7 @@ Including
  * python
  * shell script
  * gdb script
+ * c test program
 
 ----------------------------------------------------------------------------------
 ### License
