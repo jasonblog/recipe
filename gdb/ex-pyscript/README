@@ -15,7 +15,9 @@ ex-hw.py
 ------------------------------------------------------
 ex-args.py
   * Description	: example to receive arguments from gdb
-  * Command	: "pyargs [argument list]"
-  * Result	: show "Argument lists: ......."
+  * Command	: "pyshowargs [argument list]"
+  * Result	: show "Argument lists: <list of all argmuments>"
+  * Command	: "pyaddargs val1 val2"
+  * Result	: show "arg1 + arg2 = <the sum value of val1 and val2>"
   * Example	: gdb -x ex-args.gdb
 
