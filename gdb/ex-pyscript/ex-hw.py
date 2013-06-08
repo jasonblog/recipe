@@ -7,10 +7,9 @@ class printHelloWorld(gdb.Command):
     """
 
     def __init__(self):
-        gdb.Command.__init__(self, "printhw", gdb.COMMAND_DATA, gdb.COMPLETE_SYMBOL, True)
+        gdb.Command.__init__(self, "pyprinthw", gdb.COMMAND_USER, gdb.COMPLETE_SYMBOL, True)
 
     def invoke(self, arg, from_tty):
-        print "hello world"
-
+        print "hello world from python script!"
 
 printHelloWorld()
