@@ -2,14 +2,20 @@ Steps:
 1. type 'make' to generate example binary
 2. replace the line 'python execfile ....' in test.gdb by
    the python module you want to load
-3. use 'gdb -x xxx.gdb' to load file and python module
+3. use 'gdb -x <example name>.gdb' to load file and python module
 4. test gdb command. The examples provided are
 
 ------------------------------------------------------
 ex-hw.py
   * Description	: example to print "hello world"
-  * Command	: "printhw"
+  * Command	: "pyprinthw"
   * Result	: show "hello world"
   * Example	: gdb -x ex-hw.gdb
 
+------------------------------------------------------
+ex-args.py
+  * Description	: example to receive arguments from gdb
+  * Command	: "pyargs [argument list]"
+  * Result	: show "Argument lists: ......."
+  * Example	: gdb -x ex-args.gdb
 
