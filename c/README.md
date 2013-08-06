@@ -8,4 +8,9 @@ ex-dhry:
 ---------------------------------------------------
 ex-warn:
   example of critical compilation warning
+
+---------------------------------------------------
+ex-weak:
+  example of using weak alias
+
 ---------------------------------------------------
