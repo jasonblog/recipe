@@ -2,22 +2,15 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-mainmenu "F9 Microkernel Configurations"
+mainmenu "Skeleton Configurations"
 
-config KPROBES
-	bool "KProbes: dynamic instrumentation system"
-	default y
+choice
+	prompt "Select Target"
 
-config SYMMAP
-	bool "Generate symbol map"
-	default y
-	depends on KPROBES
+config TARGET_skeleton
+	bool "skeleton"	
 
-config BITMAP_BITBAND
-	bool "Generate bitmap address in bit-band region"
-	default y
+config TARGET_azmodan
+	bool "azmodan"	
 
-config PANIC_DUMP_STACK
-	bool "Dump kernel stack while panic"
-	default y
-
+endchoice

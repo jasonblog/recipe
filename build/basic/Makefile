@@ -7,19 +7,17 @@ CONFIG := .config
 ifneq (,$(wildcard $(CONFIG)))
 include $(CONFIG)
 else
-all: unconfigured_error
-.PHONY: unconfigured_error
-unconfigured_error:
-	@echo "Please ensure that F9 Microkernel is configured by 'make config'"
+all: config_error
+.PHONY: config_error
+config_error:
+	@echo "Please ensure that it is configured by 'make config'"
 	@$(MAKE) -s UNKNOWN 2>/dev/null
 endif
 
-BOARD ?= discoveryf4
-
-PROJECT ?= f9
+TARGET = $(CONFIG_TARGET)
 
 # output directory for build objects
-out ?= build/$(BOARD)
+out ?= build/$(TARGET)
 
 # output directory for host build targets
 out_host ?= build/host
@@ -28,15 +26,15 @@ out_host ?= build/host
 include mk/toolchain.mk
 
 # obtain CHIP name
-include board/$(BOARD)/build.mk
+include target/$(TARGET)/build.mk
 
 # Transform the configuration into make variables
 includes = \
-	board/$(BOARD) \
+	target/$(TARGET) \
 	include \
 	include/platform \
 	$(dirs) $(out)
-$(eval BOARD_$(BOARD)=y)
+$(eval TARGET_$(TARGET)=y)
 
 # Read configurations about system features and characteristics
 include mk/config.mk
@@ -55,7 +53,7 @@ objs_from_dir = $(foreach obj, $($(2)-y), \
 
 # Get all sources to build
 all-y += $(call objs_from_dir,platform/$(CHIP),chip)
-all-y += $(call objs_from_dir,board/$(BOARD),board)
+all-y += $(call objs_from_dir,target/$(TARGET),target)
 all-y += $(call objs_from_dir,platform,platform)
 all-y += $(call objs_from_dir,kernel/lib,kernel-lib)
 all-y += $(call objs_from_dir,kernel,kernel)
@@ -64,7 +62,7 @@ dirs = \
 	kernel/lib \
 	kernel \
 	platform/$(CHIP) \
-	board/$(BOARD) \
+	target/$(TARGET) \
 	user
 
 # Get special rules
