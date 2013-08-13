@@ -6,6 +6,7 @@ Including
  * shell script
  * gdb script
  * c test program
+ * build environment
 
 ----------------------------------------------------------------------------------
 ### License
