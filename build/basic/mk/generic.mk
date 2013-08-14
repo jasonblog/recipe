@@ -31,12 +31,12 @@ cmd_c_to_build = $(BUILDCC) $(BUILD_CFLAGS) $(BUILD_LDFLAGS) \
 cmd_bin = cat $^ > $@
 
 # commands to build Kconfig
-KCONFIG := external/kconfig
+KCONFIG := utils/kconfig
 cmd_kconfig_prepare = mkdir -p $(out_host) $(out_host)/lxdialog
-cmd_kconfig = $(MAKE) --no-print-directory -C $(KCONFIG) -f Makefile.f9 mconf \
+cmd_kconfig = $(MAKE) --no-print-directory -C $(KCONFIG) -f main.mk default \
 		obj=$(shell pwd)/$(out_host) \
 		CC="$(BUILDCC)" HOSTCC="$(BUILDCC)"
-cmd_mconf = $< mk/Config.in
+cmd_mconf = $< Kconfig
 
 .PHONY: all
 all: $(out)/$(PROJECT).bin
