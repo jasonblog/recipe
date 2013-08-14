@@ -14,36 +14,28 @@ config_error:
 	@$(MAKE) -s UNKNOWN 2>/dev/null
 endif
 
-TARGET = $(CONFIG_TARGET)
+BOARD ?= skeleton
 
 # output directory for build objects
-out ?= build/$(TARGET)
+out ?= build/$(BOARD)
 
-# output directory for host build targets
+# output directory for host build boardss
 out_host ?= build/host
 
 # toolchain specific configurations; common cflags and ldflags
 include mk/toolchain.mk
 
 # obtain CHIP name
-include target/$(TARGET)/build.mk
+include boards/$(BOARD)/build.mk
 
 # Transform the configuration into make variables
 includes = \
-	target/$(TARGET) \
+	boards/$(BOARD) \
 	include \
-	include/platform \
 	$(dirs) $(out)
-$(eval TARGET_$(TARGET)=y)
-
-# Read configurations about system features and characteristics
-include mk/config.mk
+$(eval CONFIG_BOARD_$(BOARD)=y)
 
 # Get build configuration from sub-directories
-include platform/$(CHIP)/build.mk
-include platform/build.mk
-include kernel/lib/build.mk
-include kernel/build.mk
 include user/build.mk
 
 includes += $(includes-y)
@@ -53,7 +45,7 @@ objs_from_dir = $(foreach obj, $($(2)-y), \
 
 # Get all sources to build
 all-y += $(call objs_from_dir,platform/$(CHIP),chip)
-all-y += $(call objs_from_dir,target/$(TARGET),target)
+all-y += $(call objs_from_dir,boards/$(BOARD),boards)
 all-y += $(call objs_from_dir,platform,platform)
 all-y += $(call objs_from_dir,kernel/lib,kernel-lib)
 all-y += $(call objs_from_dir,kernel,kernel)
@@ -62,7 +54,7 @@ dirs = \
 	kernel/lib \
 	kernel \
 	platform/$(CHIP) \
-	target/$(TARGET) \
+	boards/$(BOARD) \
 	user
 
 # Get special rules
