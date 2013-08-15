@@ -1031,6 +1031,7 @@ int main(int ac, char **av)
 		res = handle_exit();
 	} while (res == KEY_ESC);
 
+	conf_write_autoconf();
 	return res;
 }
 

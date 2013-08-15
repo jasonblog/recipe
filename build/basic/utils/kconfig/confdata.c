@@ -976,6 +976,10 @@ int conf_write_autoconf(void)
 
 	conf_write_heading(out_h, &header_printer_cb, NULL);
 
+	/* write include guard */
+	fprintf(out_h, "#ifndef AUTOCONF_H\n");
+	fprintf(out_h, "#define AUTOCONF_H\n");
+
 	for_all_symbols(i, sym) {
 		sym_calc_value(sym);
 		if (!(sym->flags & SYMBOL_WRITE) || !sym->name)
@@ -988,13 +992,15 @@ int conf_write_autoconf(void)
 
 		conf_write_symbol(out_h, sym, &header_printer_cb, NULL);
 	}
+	/* write include guard */
+	fprintf(out_h, "#endif /* AUTOCONF_H */\n");
 	fclose(out);
 	fclose(tristate);
 	fclose(out_h);
 
 	name = getenv("KCONFIG_AUTOHEADER");
 	if (!name)
-		name = "include/generated/autoconf.h";
+		name = "include/autoconf.h";
 	if (rename(".tmpconfig.h", name))
 		return 1;
 	name = getenv("KCONFIG_TRISTATE");
