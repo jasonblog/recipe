@@ -948,35 +948,12 @@ int conf_write_autoconf(void)
 
 	sym_clear_all_valid();
 
-	file_write_dep("include/config/auto.conf.cmd");
-
-	if (conf_split_config())
-		return 1;
-
-	out = fopen(".tmpconfig", "w");
-	if (!out)
-		return 1;
-
-	tristate = fopen(".tmpconfig_tristate", "w");
-	if (!tristate) {
-		fclose(out);
-		return 1;
-	}
-
 	out_h = fopen(".tmpconfig.h", "w");
 	if (!out_h) {
-		fclose(out);
-		fclose(tristate);
 		return 1;
 	}
 
-	conf_write_heading(out, &kconfig_printer_cb, NULL);
-
-	conf_write_heading(tristate, &tristate_printer_cb, NULL);
-
 	conf_write_heading(out_h, &header_printer_cb, NULL);
-
-	/* write include guard */
 	fprintf(out_h, "#ifndef AUTOCONF_H\n");
 	fprintf(out_h, "#define AUTOCONF_H\n");
 
@@ -985,35 +962,17 @@ int conf_write_autoconf(void)
 		if (!(sym->flags & SYMBOL_WRITE) || !sym->name)
 			continue;
 
-		/* write symbol to auto.conf, tristate and header files */
-		conf_write_symbol(out, sym, &kconfig_printer_cb, (void *)1);
-
-		conf_write_symbol(tristate, sym, &tristate_printer_cb, (void *)1);
-
+		/* write symbol to header files */
 		conf_write_symbol(out_h, sym, &header_printer_cb, NULL);
 	}
-	/* write include guard */
 	fprintf(out_h, "#endif /* AUTOCONF_H */\n");
-	fclose(out);
-	fclose(tristate);
+
 	fclose(out_h);
 
 	name = getenv("KCONFIG_AUTOHEADER");
 	if (!name)
 		name = "include/autoconf.h";
 	if (rename(".tmpconfig.h", name))
-		return 1;
-	name = getenv("KCONFIG_TRISTATE");
-	if (!name)
-		name = "include/config/tristate.conf";
-	if (rename(".tmpconfig_tristate", name))
-		return 1;
-	name = conf_get_autoconfig_name();
-	/*
-	 * This must be the last step, kbuild has a dependency on auto.conf
-	 * and this marks the successful completion of the previous steps.
-	 */
-	if (rename(".tmpconfig", name))
 		return 1;
 
 	return 0;
