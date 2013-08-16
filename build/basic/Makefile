@@ -15,6 +15,7 @@ config_error:
 endif
 
 BOARD ?= skeleton
+TOOLCHAIN ?= gcc
 
 # output directory for build objects
 out ?= build/$(BOARD)
@@ -22,11 +23,11 @@ out ?= build/$(BOARD)
 # output directory for host build boardss
 out_host ?= build/host
 
-# toolchain specific configurations; common cflags and ldflags
-include mk/toolchain.mk
-
 # obtain CHIP name
 include boards/$(BOARD)/build.mk
+
+# toolchain specific configurations; common cflags and ldflags
+include mk/toolchain/$(TOOLCHAIN).mk
 
 # Transform the configuration into make variables
 includes = \
