@@ -2,7 +2,7 @@
 #include <foo.h>
 
 int
-main(int argc, void **argv)
+main(int argc, char **argv)
 {
     printf("hello world\n");
     foo();

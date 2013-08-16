@@ -23,8 +23,8 @@ silent = $(if $(V),,1>/dev/null)
 cmd_obj_to_bin = $(OBJCOPY) -O binary $< $@
 cmd_elf_to_list = $(OBJDUMP) -S $< > $@
 cmd_elf = $(LD) $(LDFLAGS) $(objs) -o $@ \
-	-L platform -T f9.ld $(LIBGCC) \
-	-Map $(out)/$*.map
+	 $(LIBGCC) \
+	-Wl,-Map,$(out)/$*.map
 cmd_c_to_o = $(CC) $(CFLAGS) -MMD -MF $@.d -c $< -o $@
 cmd_c_to_build = $(BUILDCC) $(BUILD_CFLAGS) $(BUILD_LDFLAGS) \
 	         -MMD -MF $@.d $< -o $@
@@ -39,7 +39,7 @@ cmd_kconfig = $(MAKE) --no-print-directory -C $(KCONFIG) -f main.mk default \
 cmd_mconf = $< Kconfig
 
 .PHONY: all
-all: $(out)/$(PROJECT).bin
+all: $(out)/$(BOARD).elf
 
 $(out)/%.bin: $(out)/%.elf.bin $(bin-list)
 	$(call quiet,bin,CAT    )
@@ -61,10 +61,6 @@ $(out)/%.o:%.S
 
 $(build-utils): $(out)/%:%.c
 	$(call quiet,c_to_build,BUILDCC)
-
-.PHONY: flash
-flash: $(out)/$(PROJECT).bin
-	$(call platform-flash-command, $<)
 
 .PHONY: clean
 clean:

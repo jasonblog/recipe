@@ -1,1 +1,1 @@
-obj-y += foo.o
+user-y += foo.o
