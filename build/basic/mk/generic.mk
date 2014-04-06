@@ -7,6 +7,11 @@ deps := $(objs:%.o=%.o.d)
 build-utils := $(foreach u,$(build-util-bin),$(out)/util/$(u))
 host-utils := $(foreach u,$(host-util-bin),$(out)/util/$(u))
 
+# temp variables
+objname = $(basename $(notdir $@))
+tmpcflags = $(CFLAGS_TOOLCHAIN) $(CFLAGS_$(objname).o)
+CFLAGS = $(filter-out $(CFLAGS_REMOVE_$(objname).o), $(tmpcflags))
+
 # Create output directories if necessary
 _dir_create := $(foreach d,$(dirs),$(shell [ -d $(out)/$(d) ] || \
 	    mkdir -p $(out)/$(d)))
