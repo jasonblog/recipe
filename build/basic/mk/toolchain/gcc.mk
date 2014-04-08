@@ -28,7 +28,7 @@ CFLAGS_DEBUG = -g3
 CFLAGS_INCLUDE = $(foreach i,$(includes),-I$(i) )
 CFLAGS_DEFINE = \
 	-D __BOARD__=$(BOARD) \
-	-D'INC_PLAT(x)=<platform/__PLATFORM__/x>' \
+	-D'INC_PLAT(x)=<platform/__PLATFORM__/x>'
 
 CFLAGS_MISC_DEFINE = \
 	-DGIT_HEAD=\"$(GIT_HEAD)\" \
@@ -36,7 +36,6 @@ CFLAGS_MISC_DEFINE = \
 	-DBUILD_TIME=\"$(BUILD_TIME)\"
 
 CPPFLAGS_TOOLCHAIN = \
-	-include include/config.h \
 	$(CFLAGS_DEFINE) $(CFLAGS_INCLUDE) $(EXTRA_CFLAGS)
 
 CFLAGS_TOOLCHAIN = \
