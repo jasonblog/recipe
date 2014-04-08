@@ -6,5 +6,6 @@ main(int argc, char **argv)
 {
     printf("hello world\n");
     foo();
+    foo2();
     return 0;
 }
