@@ -20,4 +20,3 @@ if __name__ == '__main__':
     print g_opts
     print g_opts.verbose
     print g_opts.arg1
-

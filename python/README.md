@@ -42,5 +42,9 @@ ex-pdb.py:
 
 ---------------------------------------------------
 ex-post.py:
-  * example of using urllib to send http post 
+  * example of using urllib to send http post
+
+---------------------------------------------------
+ex-optparser.py:
+  * example of using arguments parser
 
