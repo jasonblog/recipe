@@ -48,3 +48,6 @@ ex-post.py:
 ex-optparser.py:
   * example of using arguments parser
 
+---------------------------------------------------
+ex-finance:
+  * example of parsing finance data from web
