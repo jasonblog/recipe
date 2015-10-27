@@ -51,3 +51,9 @@ ex-optparser.py:
 ---------------------------------------------------
 ex-finance:
   * example of parsing finance data from web
+
+---------------------------------------------------
+ex-dict.py:
+  * example of dictionary usage
+
+
